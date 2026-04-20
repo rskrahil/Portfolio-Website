@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Rahil Shaikh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+        .fade-up {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: none; }
+
+        .interest-tag {
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .interest-tag:hover {
+            background: rgba(59,130,246,0.15);
+            border-color: #3b82f6;
+            color: #93c5fd;
+        }
+
+        .card-glow:hover {
+            box-shadow: 0 0 24px 2px rgba(59,130,246,0.18);
+        }
+
+        /* Character styles */
+        #character-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            flex-shrink: 0;
+        }
+
+        /* Head bob animation */
+        #char-head {
+            transition: transform 0.15s ease-out;
+            transform-origin: center bottom;
+        }
+
+        /* Eye follow */
+        .eye-pupil {
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Input focus glow */
+        .input-field {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: white;
+            padding: 14px 18px;
+            width: 100%;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+        }
+        .input-field::placeholder { color: rgba(255,255,255,0.25); }
+
+        /* Send button */
+        .send-btn {
+            background: #2563eb;
+            color: white;
+            padding: 13px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            font-family: 'Inter', sans-serif;
+        }
+        .send-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .send-btn:active { transform: translateY(0); }
+
+        /* Animated underline */
+        .animated-underline { position: relative; display: inline-block; }
+        .animated-underline::after {
+            content: ''; position: absolute; left: 0; bottom: -4px;
+            width: 0; height: 2px; background: #3b82f6;
+            transition: width 0.4s ease;
+        }
+        .animated-underline:hover::after { width: 100%; }
+
+        /* Character SVG animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        #character-wrap {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Waving hand */
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(20deg); }
+            75% { transform: rotate(-10deg); }
+        }
+        #char-hand { transform-origin: bottom center; animation: wave 1.5s ease-in-out infinite; }
+
+        /* Blink */
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        .eye-lid { animation: blink 3.5s ease-in-out infinite; transform-origin: center; }
+
+        /* Success message */
+        #success-msg {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    </style>
+</head>
+<body class="min-h-screen bg-black bg-[radial-gradient(circle_at_center,_#1e293b_0%,_#020617_45%,_#000_75%)] overflow-x-hidden">
+
+    <!-- NAV -->
+    <nav class="flex items-center justify-between px-6 sm:px-10 py-5">
+        <a href="index.html" class="text-2xl font-bold text-white font-montserrat hover:text-blue-400 transition">RS</a>
+        <div class="flex space-x-4 sm:space-x-10">
+            <a href="#" class="px-3 sm:px-4 py-2 text-white font-medium rounded-md hover:bg-gray-800 transition text-sm sm:text-base">Resume</a>
+            <a href="#" class="border border-gray-400 px-3 sm:px-4 py-2 text-white font-medium rounded-md hover:bg-white hover:text-black transition text-sm sm:text-base">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO LABEL -->
+    <section class="px-6 sm:px-10 pt-8 pb-2 fade-up">
+        <p class="text-blue-400 font-semibold text-sm tracking-widest uppercase mb-3">Contact</p>
+        <h1 class="font-montserrat text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            Let's build something<br class="hidden sm:block"> <span class="text-blue-400">great.</span>
+        </h1>
+        <p class="text-gray-400 text-base sm:text-lg mt-4 max-w-xl leading-relaxed">
+            I'm always open to new opportunities, collaborations, or just a good conversation about tech.
+        </p>
+    </section>
+
+    <!-- MAIN CONTACT SECTION -->
+    <section class="px-6 sm:px-10 py-10 fade-up">
+        <div class="border border-gray-700/60 rounded-2xl bg-white/[0.02] p-8 sm:p-12 flex flex-col lg:flex-row gap-12 items-center max-w-5xl">
+
+            <!-- CHARACTER -->
+            <div id="character-container" class="flex-shrink-0 mx-auto lg:mx-0">
+                <div id="character-wrap">
+                    <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                        <!-- Body hoodie -->
+                        <path d="M65 175 Q80 160 110 157 Q140 160 155 175 L160 220 H60 Z" fill="#1e3a5f"/>
+                        <rect x="95" y="190" width="30" height="18" rx="4" fill="#162d4a"/>
+                        <path d="M97 165 L110 175 L123 165" stroke="#2a4a7f" stroke-width="2" fill="none"/>
+
+                        <!-- Neck -->
+                        <rect x="101" y="148" width="18" height="20" rx="7" fill="#e8a882"/>
+
+                        <!-- HEAD GROUP -->
+                        <g id="char-head">
+                            <!-- Head squarish -->
+                            <rect x="62" y="72" width="96" height="98" rx="32" fill="#e8a882"/>
+
+                            <!-- Short male hair -->
+                            <path d="M62 90 Q63 58 110 55 Q157 58 158 90 Q150 65 110 63 Q70 65 62 90Z" fill="#2c1f14"/>
+                            <path d="M68 82 Q70 60 110 58 Q150 60 152 82 Q148 68 110 66 Q72 68 68 82Z" fill="#3d2b1a"/>
+
+                            <!-- Ears -->
+                            <ellipse cx="62" cy="118" rx="8" ry="10" fill="#e8a882"/>
+                            <ellipse cx="158" cy="118" rx="8" ry="10" fill="#e8a882"/>
+                            <ellipse cx="62" cy="118" rx="4" ry="6" fill="#d4906a" opacity="0.4"/>
+                            <ellipse cx="158" cy="118" rx="4" ry="6" fill="#d4906a" opacity="0.4"/>
+
+                            <!-- Glasses rectangular -->
+                            <rect x="70" y="108" width="32" height="20" rx="5" fill="none" stroke="#444" stroke-width="2.5"/>
+                            <rect x="118" y="108" width="32" height="20" rx="5" fill="none" stroke="#444" stroke-width="2.5"/>
+                            <line x1="102" y1="118" x2="118" y2="118" stroke="#444" stroke-width="2.5"/>
+                            <line x1="70" y1="118" x2="63" y2="116" stroke="#444" stroke-width="2.5"/>
+                            <line x1="150" y1="118" x2="157" y2="116" stroke="#444" stroke-width="2.5"/>
+                            <rect x="70" y="108" width="32" height="20" rx="5" fill="#93c5fd" opacity="0.06"/>
+                            <rect x="118" y="108" width="32" height="20" rx="5" fill="#93c5fd" opacity="0.06"/>
+
+                            <!-- LEFT EYE -->
+                            <g id="eye-left">
+                                <ellipse cx="86" cy="118" rx="10" ry="8" fill="white"/>
+                                <g class="eye-pupil" id="pupil-left">
+                                    <ellipse cx="86" cy="118" rx="5" ry="5.5" fill="#1a0f0a"/>
+                                    <ellipse cx="88" cy="116" rx="1.5" ry="1.5" fill="white"/>
+                                </g>
+                                <ellipse class="eye-lid" cx="86" cy="118" rx="10" ry="8" fill="#e8a882" opacity="0"/>
+                            </g>
+
+                            <!-- RIGHT EYE -->
+                            <g id="eye-right">
+                                <ellipse cx="134" cy="118" rx="10" ry="8" fill="white"/>
+                                <g class="eye-pupil" id="pupil-right">
+                                    <ellipse cx="134" cy="118" rx="5" ry="5.5" fill="#1a0f0a"/>
+                                    <ellipse cx="136" cy="116" rx="1.5" ry="1.5" fill="white"/>
+                                </g>
+                                <ellipse class="eye-lid" cx="134" cy="118" rx="10" ry="8" fill="#e8a882" opacity="0"/>
+                            </g>
+
+                            <!-- Eyebrows thick flat -->
+                            <path d="M74 105 Q86 101 98 104" stroke="#2c1f14" stroke-width="3" stroke-linecap="round" fill="none"/>
+                            <path d="M122 104 Q134 101 146 105" stroke="#2c1f14" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+                            <!-- Nose -->
+                            <path d="M105 128 Q110 136 115 128" stroke="#c07850" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <ellipse cx="106" cy="133" rx="3" ry="2" fill="#c07850" opacity="0.3"/>
+                            <ellipse cx="114" cy="133" rx="3" ry="2" fill="#c07850" opacity="0.3"/>
+
+                            <!-- Smile -->
+                            <path id="char-mouth" d="M97 145 Q110 154 123 145" stroke="#b06840" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+                            <!-- Subtle stubble -->
+                            <ellipse cx="110" cy="155" rx="18" ry="8" fill="#c07850" opacity="0.08"/>
+
+                            <!-- Cheeks subtle -->
+                            <ellipse cx="74" cy="133" rx="9" ry="6" fill="#f4a0a0" opacity="0.18"/>
+                            <ellipse cx="146" cy="133" rx="9" ry="6" fill="#f4a0a0" opacity="0.18"/>
+                        </g>
+
+                        <!-- Waving hand -->
+                        <g id="char-hand" style="transform-origin: 155px 170px;">
+                            <ellipse cx="158" cy="162" rx="12" ry="10" fill="#e8a882"/>
+                            <rect x="152" y="150" width="5" height="14" rx="2.5" fill="#e8a882"/>
+                            <rect x="158" y="148" width="5" height="16" rx="2.5" fill="#e8a882"/>
+                            <rect x="164" y="150" width="5" height="14" rx="2.5" fill="#e8a882"/>
+                            <rect x="169" y="153" width="4" height="11" rx="2" fill="#e8a882"/>
+                            <rect x="147" y="154" width="4" height="10" rx="2" fill="#e8a882"/>
+                        </g>
+
+                    </svg>
+                </div>
+
+                <!-- Speech bubble -->
+                <div class="mt-3 text-center">
+                    <span id="char-speech" class="text-gray-400 text-sm italic transition-all duration-300">"I'm always up for a chat!"</span>
+                </div>
+            </div>
+
+            <!-- CONTACT FORM -->
+            <div class="flex-1 w-full">
+                <h2 class="font-montserrat text-2xl sm:text-3xl font-bold text-white mb-2 animated-underline">Send me a message</h2>
+                <p class="text-gray-500 text-sm mb-8">I'll get back to you within 24 hours.</p>
+
+                <form id="contact-form" class="space-y-5" onsubmit="handleSubmit(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 block">Name</label>
+                            <input type="text" class="input-field" placeholder="Rahil Shaikh" required />
+                        </div>
+                        <div>
+                            <label class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 block">Email</label>
+                            <input type="email" class="input-field" placeholder="rahil@example.com" required />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 block">Subject</label>
+                        <input type="text" class="input-field" placeholder="Let's work together!" />
+                    </div>
+                    <div>
+                        <label class="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 block">Message</label>
+                        <textarea class="input-field" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+                    </div>
+                    <div class="flex items-center justify-between flex-wrap gap-4">
+                        <button type="submit" class="send-btn flex items-center gap-2">
+                            Send Message
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <p class="text-gray-600 text-xs">Or email directly: <a href="mailto:rahil@example.com" class="text-blue-400 hover:underline">rahil@example.com</a></p>
+                    </div>
+                </form>
+
+                <!-- Success message -->
+                <div id="success-msg" class="mt-6 border border-green-700/40 bg-green-900/20 rounded-xl p-5 text-center">
+                    <p class="text-green-400 font-semibold text-lg">Message sent! 🎉</p>
+                    <p class="text-gray-400 text-sm mt-1">Thanks for reaching out. I'll reply within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK CONTACT CARDS -->
+    <section class="px-6 sm:px-10 py-6 fade-up">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-5xl">
+
+            <a href="mailto:rahil@example.com" class="card-glow border border-gray-700/60 rounded-2xl p-5 bg-white/[0.02] flex items-center gap-4 transition group">
+                <div class="w-10 h-10 rounded-xl bg-blue-900/40 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider">Email</p>
+                    <p class="text-white text-sm font-medium group-hover:text-blue-400 transition">rahil@example.com</p>
+                </div>
+            </a>
+
+            <a href="#" class="card-glow border border-gray-700/60 rounded-2xl p-5 bg-white/[0.02] flex items-center gap-4 transition group">
+                <div class="w-10 h-10 rounded-xl bg-blue-900/40 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider">LinkedIn</p>
+                    <p class="text-white text-sm font-medium group-hover:text-blue-400 transition">Rahil Shaikh</p>
+                </div>
+            </a>
+
+            <a href="#" class="card-glow border border-gray-700/60 rounded-2xl p-5 bg-white/[0.02] flex items-center gap-4 transition group">
+                <div class="w-10 h-10 rounded-xl bg-blue-900/40 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-xs uppercase tracking-wider">GitHub</p>
+                    <p class="text-white text-sm font-medium group-hover:text-blue-400 transition">github.com/rahil</p>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- FOOTER ICONS -->
+    <div class="flex space-x-8 justify-center p-10">
+        <div class="relative group flex items-center cursor-pointer">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4zm9 0v5h5L13 4zM8 13h8v1.5H8V13zm0 3h6v1.5H8V16z"/></svg>
+            <span class="text-white font-semibold text-xl hidden group-hover:inline group-hover:ml-2">Resume</span>
+        </div>
+        <div class="relative group flex items-center cursor-pointer">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span class="text-white font-semibold text-xl hidden group-hover:inline group-hover:ml-2">LinkedIn</span>
+        </div>
+        <div class="relative group flex items-center cursor-pointer">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <span class="text-white font-semibold text-xl hidden group-hover:inline group-hover:ml-2">GitHub</span>
+        </div>
+        <div class="relative group flex items-center cursor-pointer">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span class="text-white font-semibold text-xl hidden group-hover:inline group-hover:ml-2">Contact</span>
+        </div>
+    </div>
+
+<script>
+// ── FADE UP ──
+const fadeEls = document.querySelectorAll('.fade-up');
+const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+    });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => fadeObs.observe(el));
+
+// ── CURSOR FOLLOWING EYES + HEAD ──
+const charHead = document.getElementById('char-head');
+const pupilLeft = document.getElementById('pupil-left');
+const pupilRight = document.getElementById('pupil-right');
+const charContainer = document.getElementById('character-container');
+const charSpeech = document.getElementById('char-speech');
+const charMouth = document.getElementById('char-mouth');
+
+const speeches = [
+    '"I\'m always up for a chat!"',
+    '"Let\'s build something great!"',
+    '"Drop me a message!"',
+    '"Open to opportunities!"',
+    '"Let\'s connect!"'
+];
+let speechIdx = 0;
+setInterval(() => {
+    speechIdx = (speechIdx + 1) % speeches.length;
+    charSpeech.style.opacity = '0';
+    setTimeout(() => {
+        charSpeech.textContent = speeches[speechIdx];
+        charSpeech.style.opacity = '1';
+    }, 300);
+}, 3000);
+
+document.addEventListener('mousemove', (e) => {
+    const rect = charContainer.getBoundingClientRect();
+    const charCx = rect.left + rect.width / 2;
+    const charCy = rect.top + rect.height / 2;
+
+    const dx = e.clientX - charCx;
+    const dy = e.clientY - charCy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    // Head tilt — subtle
+    const maxTilt = 8;
+    const tiltX = Math.max(-maxTilt, Math.min(maxTilt, dx / 30));
+    const tiltY = Math.max(-maxTilt, Math.min(maxTilt, dy / 30));
+    charHead.style.transform = `rotate(${tiltX * 0.4}deg) translateX(${tiltX * 0.5}px) translateY(${tiltY * 0.3}px)`;
+
+    // Eye movement — pupils follow cursor
+    const maxPupilMove = 3;
+    const angle = Math.atan2(dy, dx);
+    const pupilDist = Math.min(dist / 80, maxPupilMove);
+    const px = Math.cos(angle) * pupilDist;
+    const py = Math.sin(angle) * pupilDist;
+
+    pupilLeft.style.transform = `translate(${px}px, ${py}px)`;
+    pupilRight.style.transform = `translate(${px}px, ${py}px)`;
+
+    // Smile gets bigger when cursor is close
+    if (dist < 200) {
+        charMouth.setAttribute('d', 'M94 142 Q110 156 126 142');
+    } else {
+        charMouth.setAttribute('d', 'M96 142 Q110 152 124 142');
+    }
+});
+
+// Reset when mouse leaves
+document.addEventListener('mouseleave', () => {
+    charHead.style.transform = 'none';
+    pupilLeft.style.transform = 'none';
+    pupilRight.style.transform = 'none';
+});
+
+// ── FORM SUBMIT ──
+function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('success-msg');
+    form.style.opacity = '0';
+    form.style.transition = 'opacity 0.3s';
+    setTimeout(() => {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        charMouth.setAttribute('d', 'M90 142 Q110 160 130 142');
+    }, 300);
+}
+</script>
+</body>
+</html>
