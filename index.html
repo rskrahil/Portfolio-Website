@@ -114,14 +114,117 @@
         .exp-inner.open .exp-arrow { transform: rotate(180deg); }
         .exp-inner.open .exp-hint { display: none; }
 
+        /* ── HERO LAYOUT ── */
+        .hero-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 100vh;
+            padding: 90px 5% 60px;
+            gap: 48px;
+            text-align: center;
+        }
+        @media (min-width: 900px) {
+            .hero-layout {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                gap: 60px;
+                padding: 80px 6% 40px;
+            }
+        }
+        .hero-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 560px;
+            width: 100%;
+        }
+        @media (min-width: 900px) {
+            .hero-text { align-items: flex-start; }
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.25);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: #86efac;
+            font-weight: 500;
+            margin-bottom: 24px;
+            width: fit-content;
+        }
+        .hero-badge-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: dot-pulse 2s ease-in-out infinite;
+        }
+        .hero-name {
+            font-family: "Montserrat", sans-serif;
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 14px;
+        }
+        .hero-name-highlight { color: #3b82f6; }
+        .hero-role {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+        .hero-sub {
+            font-size: 12px;
+            color: #6b7280;
+            letter-spacing: 0.05em;
+            margin-bottom: 18px;
+            font-family: "Courier New", monospace;
+        }
+        .hero-desc {
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            max-width: 480px;
+        }
+        .hero-icons {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 900px) {
+            .hero-icons { justify-content: flex-start; }
+        }
+        .hero-photo-wrap {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 900px) {
+            .hero-photo-wrap { padding-right: 3%; }
+        }
+
         /* ── PHOTO STACK ── */
         .photo-stack {
             position: relative;
-            width: 220px;
-            height: 260px;
+            width: 200px;
+            height: 230px;
         }
         @media (min-width: 640px) {
-            .photo-stack { width: 280px; height: 320px; }
+            .photo-stack { width: 240px; height: 270px; }
+        }
+        @media (min-width: 900px) {
+            .photo-stack { width: 300px; height: 340px; }
         }
         .photo-back, .photo-front {
             position: absolute;
@@ -162,16 +265,19 @@
     </nav>
 
     <!-- ── SECTION 1: HERO ── -->
-    <section class="snap-section px-6 sm:px-10">
-        <div style="display:flex; flex-direction:column; align-items:center; gap:40px; width:100%;" class="lg:flex-row lg:gap-16">
-            <div style="flex:1; display:flex; flex-direction:column; width:100%;">
-                <img src="assets/icons/Homepage.svg" alt="Homepage" class="mb-6 w-16 h-16 hover:animate-spin cursor-pointer"/>
-                <h1 class="text-3xl sm:text-4xl font-bold font-montserrat text-white mb-4">Hi, I'm Rahil Shaikh</h1>
-                <h2 class="text-xl sm:text-2xl font-bold text-white mb-4 leading-snug">
-                    Junior Software Developer | Python, Java, SQL<br> Passionate About Scalable Solutions
-                </h2>
-                <p class="text-gray-500 text-lg" style="max-width:500px;">I design adaptable, scalable, and efficient solutions across software, data, and modern IT systems.</p>
-                <div class="flex gap-6 mt-8">
+    <section class="snap-section" style="padding-left:0; padding-right:0;">
+        <div class="hero-layout">
+            <!-- Left: Text -->
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Open to opportunities
+                </div>
+                <h1 class="hero-name">Hi, I'm<br><span class="hero-name-highlight">Rahil Shaikh</span></h1>
+                <p class="hero-role">Full Stack Developer | MS Information Technology</p>
+                <p class="hero-sub">Python · Java · SQL · FastAPI · React</p>
+                <p class="hero-desc">I build adaptable, scalable, and efficient solutions — from clean REST APIs to data pipelines and AI-powered features.</p>
+                <div class="hero-icons">
                     <div class="group flex items-center cursor-pointer gap-0 hover:gap-2 transition-all duration-300">
                         <img src="assets/icons/Resume.svg" class="w-5 h-5" />
                         <span class="text-white font-semibold text-sm max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300">Resume</span>
@@ -190,9 +296,12 @@
                     </div>
                 </div>
             </div>
-            <div class="photo-stack" style="flex-shrink:0; margin-right:0;">
-                <img src="assets/images/m2.jpg" alt="Second" class="photo-back border-4 border-white/60 object-cover rounded-xl"/>
-                <img src="assets/images/image-self.jpeg" alt="First" class="photo-front border-4 border-white/60 object-cover rounded-xl"/>
+            <!-- Right: Photo -->
+            <div class="hero-photo-wrap">
+                <div class="photo-stack">
+                    <img src="assets/images/m2.jpg" alt="Second" class="photo-back border-4 border-white/60 object-cover rounded-xl"/>
+                    <img src="assets/images/image-self.jpeg" alt="First" class="photo-front border-4 border-white/60 object-cover rounded-xl"/>
+                </div>
             </div>
         </div>
     </section>
