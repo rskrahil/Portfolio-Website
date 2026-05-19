@@ -10,4 +10,8 @@ Coming soon...
 - Tailwind CSS
 - Inter & Montserrat fonts
 
+## 📁 Pages
+- **Home** — Hero, About, Skills, Experience, Education
+- **Contact** — Interactive contact form with animated character
+
 ⭐ Star this repo if you like it!
